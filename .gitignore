@@ -1,9 +1,3 @@
-#########
-## Ignore output directories
-#########
-cgi-bin/edgdownload/*
-
-
 #################
 ## Eclipse
 #################
