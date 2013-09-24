@@ -1,4 +1,4 @@
-/*
+﻿/*
         Innovate GIS V2.1
         - Added functions for dropdown menu to operate properly
         - Added functions to add descriptions to each stats section on annual pages
@@ -15,41 +15,41 @@ function onLoadFunctions() {
 
 function addSectionDescriptions() {
    
-    var ExtraSection1Desc = "Description for Extra Section Number 1 telling the user more about the stats shown here."; 
+    var ExtraSection1Desc = "The table below shows the total number of downloads in both the public and restricted directories."; 
         if (document.getElementById('extra1')) {
             console.log("Found the div extra1");
             document.getElementById('extra1').innerHTML = ExtraSection1Desc;
         }
     
     
-    var ExtraSection2Desc = "Description for Extra Section Number 2 telling the user more about the stats shown here."; 
+    var ExtraSection2Desc = "The table below shows the number of downloads for each top-level folder in the restricted directory.  These typically correspond to EPA organizations."; 
         if (document.getElementById('extra2')) {
             console.log("Found the div extra2");
             document.getElementById('extra2').innerHTML = ExtraSection2Desc;
         }
     
     
-    var ExtraSection3Desc = "Description for Extra Section Number 3 telling the user more about the stats shown here."; 
+    var ExtraSection3Desc = "The table below shows the number of downloads for each top-level folder in the public directory.  These typically correspond to EPA organizations.";
         if (document.getElementById('extra3')) {
             console.log("Found the div extra3");
             document.getElementById('extra3').innerHTML = ExtraSection3Desc;
         }
     
     
-    var ExtraSection4Desc = "Description for Extra Section Number 4 telling the user more about the stats shown here."; 
+    var ExtraSection4Desc = "The table below shows the number of downloads for each data-containing folder in the public directory.  Download counts for individual files in each folder are aggregated here."; 
         if (document.getElementById('extra4')) {
             console.log("Found the div extra4");
             document.getElementById('extra4').innerHTML = ExtraSection4Desc;
         }
     
     
-    var ExtraSection5Desc = "Description for Extra Section Number 5 telling the user more about the stats shown here."; 
+    var ExtraSection5Desc = "The table below shows the number of downloads for each data-containing folder in the restricted directory.  Download counts for individual files in each folder are aggregated here."; 
         if (document.getElementById('extra5')) {
             console.log("Found the div extra5");
             document.getElementById('extra5').innerHTML = ExtraSection5Desc;
         }
     
-    var HostTableDesc = "Description for Host Table telling the user more about the stats shown here."; 
+    var HostTableDesc = "The links below will open a page showing the internal EPA hosts who have downloaded data. That page will have a link to an additional page showing external hosts who have downloaded data. We do not currently link hosts to specific files."; 
         if (document.getElementById('HostTableDesc')) {
             console.log("Found the div HostTableDesc");
             document.getElementById('HostTableDesc').innerHTML = HostTableDesc;
@@ -62,7 +62,7 @@ function addSectionDescriptions() {
 function turnFrogIntoLink() {
 
     var frogText = "frog.epa.gov";
-    var newFrogLink = '<a href="http://www.google.com">Public Hosts List</a>';
+    var newFrogLink = '<a href="http://edg.epa.gov">Public Hosts List</a>';
     
     if (document.body != null ) {                                                          
         document.body.innerHTML = document.body.innerHTML.replace(frogText, newFrogLink);                                                                              
