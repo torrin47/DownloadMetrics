@@ -28,17 +28,19 @@ if not os.path.isdir(staticPagesOutputDir):
 #Update and combine all one-day log files in logs folder into one large log file to parse.
 #relative paths from where this py script is located
 with open(os.devnull, "w") as tempFile: 
-    subprocess.call(r'perl logresolvemerge.pl C:\WINDOWS\system32\LogFiles\W3SVC1\* > ./edgdownload/internal/logs/pathToCombinedLogFile/AllLogs.log', shell=True, stdout=tempFile)
+    subprocess.call(r'C:\perl\bin\perl.exe logresolvemerge.pl C:\WINDOWS\system32\LogFiles\W3SVC1\* > ./edgdownload/internal/logs/pathToCombinedLogFile/AllLogs.log', shell=True, stdout=tempFile)
 
 #Update the monthly log database
-subprocess.call(r"perl awstats.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\awstats.pl -config=internal -update")
+subprocess.call(r"C:\perl\bin\perl.exe awstats.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\awstats.pl -config=internal -update")
 
 #Update current monthly webpages  
-subprocess.call(r"perl awstats_buildstaticpages.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\awstats.pl -config=internal -update -dir=" + staticPagesOutputDir)
+subprocess.call(r"C:\perl\bin\perl.exe awstats_buildstaticpages.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\awstats.pl -config=internal -update -dir=" + staticPagesOutputDir)
 
-
-
+#Switch to annual directory for script execution
+os.chdir(r"D:\Public\Data\DownloadMetrics\cgi-bin\annual")
+#Update the annual log database
+subprocess.call(r"C:\perl\bin\perl.exe awstats.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\annual\awstats.pl -config=internal -update")
 #The annual summarized output HTML is updated
 if not os.path.isdir(staticPagesOutputDir[:-2]):
     os.makedirs(staticPagesOutputDir[:-2])
-subprocess.call(r"perl annual/awstats_buildstaticpages.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\annual\awstats.pl -config=internal -month=all -year=" + currentYear + r" -update -dir=." + staticPagesOutputDir[:-2])
+subprocess.call(r"C:\perl\bin\perl.exe awstats_buildstaticpages.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\annual\awstats.pl -config=internal -month=all -year=" + currentYear + r" -update -dir=.." + staticPagesOutputDir[:-2])
