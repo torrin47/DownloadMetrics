@@ -1,11 +1,13 @@
 ﻿/*
-        Innovate GIS V2.1
+        Innovate GIS V2.1.2
+
         - Added functions for dropdown menu to operate properly
-        - Added functions to add descriptions to each stats section on annual pages
-        
+        - Added functions to add descriptions to each stats section on annual pages and frog host table
+        - Added functions to navigate between internal and external pages
+		
         TableSort revisited v5.0 by frequency-decoder.com
         Released under a creative commons Attribution-ShareAlike 2.5 license (http://creativecommons.org/licenses/by-sa/2.5/)
-        Please credit frequency decoder in any derivative work - thanks
+        
 */
 
 function onLoadFunctions() {
@@ -17,59 +19,64 @@ function addSectionDescriptions() {
    
     var ExtraSection1Desc = "The table below shows the total number of downloads in both the public and restricted directories."; 
         if (document.getElementById('extra1')) {
-            console.log("Found the div extra1");
             document.getElementById('extra1').innerHTML = ExtraSection1Desc;
         }
     
     
     var ExtraSection2Desc = "The table below shows the number of downloads for each top-level folder in the restricted directory.  These typically correspond to EPA organizations."; 
         if (document.getElementById('extra2')) {
-            console.log("Found the div extra2");
             document.getElementById('extra2').innerHTML = ExtraSection2Desc;
         }
     
     
     var ExtraSection3Desc = "The table below shows the number of downloads for each top-level folder in the public directory.  These typically correspond to EPA organizations.";
         if (document.getElementById('extra3')) {
-            console.log("Found the div extra3");
             document.getElementById('extra3').innerHTML = ExtraSection3Desc;
         }
     
     
     var ExtraSection4Desc = "The table below shows the number of downloads for each data-containing folder in the public directory.  Download counts for individual files in each folder are aggregated here."; 
         if (document.getElementById('extra4')) {
-            console.log("Found the div extra4");
             document.getElementById('extra4').innerHTML = ExtraSection4Desc;
         }
     
     
     var ExtraSection5Desc = "The table below shows the number of downloads for each data-containing folder in the restricted directory.  Download counts for individual files in each folder are aggregated here."; 
         if (document.getElementById('extra5')) {
-            console.log("Found the div extra5");
             document.getElementById('extra5').innerHTML = ExtraSection5Desc;
         }
     
     var HostTableDesc = "The links below will open a page showing the internal EPA hosts who have downloaded data. That page will have a link to an additional page showing external hosts who have downloaded data. We do not currently link hosts to specific files."; 
         if (document.getElementById('HostTableDesc')) {
-            console.log("Found the div HostTableDesc");
             document.getElementById('HostTableDesc').innerHTML = HostTableDesc;
         }
+	
     
+    var FrogHostTableDesc = "The table below shows the external hosts who have downloaded data. We do not currently link hosts to specific files."; 
+        if (document.getElementById('FrogHostTableDesc')) {
+            document.getElementById('FrogHostTableDesc').innerHTML = FrogHostTableDesc;
+        }
     
 }
 
 
 function turnFrogIntoLink() {
 
-    var frogText = "frog.epa.gov";
-    var newFrogLink = '<a href="http://edg.epa.gov">Public Hosts List</a>';
+	currentBaseURL = location.href.substring(0,location.href.lastIndexOf("/"));
+	var newBaseURL=currentBaseURL.replace("edg-intranet.epa","edg.epa"); 
+	
+	var frogText = "frog.epa.gov";
+    var newFrogLink = '<a href="' + newBaseURL + '">Public Hosts List</a>';
     
     if (document.body != null ) {                                                          
         document.body.innerHTML = document.body.innerHTML.replace(frogText, newFrogLink);                                                                              
     }  
+	
 }
   
-  
+function goBackOnePage() {
+	self.history.back(); //Go back 1 page within iframe, not parent page
+} 
 
   
   
@@ -88,11 +95,11 @@ window.onload=onLoadFunctions;
 //Dropdown Menu Functions Section Start
 
 function takeuserto(form) {
-currentBaseURL = location.href.substring(0,location.href.lastIndexOf("/") - 4);
-selMonth = document.getElementById('selMonth').options[document.getElementById('selMonth').selectedIndex].value;
-selYear = document.getElementById('selYear').options[document.getElementById('selYear').selectedIndex].value;
-newPageLoc = currentBaseURL + selYear + selMonth + "/" + (location.href.substr(location.href.lastIndexOf("/") + 1));
-checkForPageLoc(newPageLoc);
+	currentBaseURL = location.href.substring(0,location.href.lastIndexOf("/") - 4);
+	selMonth = document.getElementById('selMonth').options[document.getElementById('selMonth').selectedIndex].value;
+	selYear = document.getElementById('selYear').options[document.getElementById('selYear').selectedIndex].value;
+	newPageLoc = currentBaseURL + selYear + selMonth + "/" + (location.href.substr(location.href.lastIndexOf("/") + 1));
+	checkForPageLoc(newPageLoc);
 }
 
 function returnStatus(req, status) {
@@ -100,7 +107,7 @@ function returnStatus(req, status) {
 	location.href = newPageLoc; //opens in same tab/window
   }
   else {
-    alert("Sorry, that month is not available.");
+    alert("Sorry, that page is not available.");
   }
 }
 
