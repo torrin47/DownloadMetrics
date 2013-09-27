@@ -28,7 +28,7 @@ if not os.path.isdir(staticPagesOutputDir):
 #Update and combine all one-day log files in logs folder into one large log file to parse.
 #relative paths from where this py script is located
 with open(os.devnull, "w") as tempFile: 
-    subprocess.call(r'C:\perl\bin\perl.exe logresolvemerge.pl C:\WINDOWS\system32\LogFiles\W3SVC1\* > ./edgdownload/internal/logs/pathToCombinedLogFile/AllLogs.log', shell=True, stdout=tempFile)
+    subprocess.call(r'C:\perl\bin\perl.exe logresolvemerge.pl C:\WINDOWS\system32\LogFiles\W3SVC1\* > ./edgdownload/internal/logs/compositelog/AllLogs.log', shell=True, stdout=tempFile)
 
 #Update the monthly log database
 subprocess.call(r"C:\perl\bin\perl.exe awstats.pl -awstatsprog=D:\Public\Data\DownloadMetrics\cgi-bin\awstats.pl -config=internal -update")
