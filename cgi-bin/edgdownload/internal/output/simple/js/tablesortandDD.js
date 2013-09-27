@@ -51,10 +51,6 @@ function addSectionDescriptions() {
             document.getElementById('HostTableDesc').innerHTML = HostTableDesc;
         }
 	
-	var FrogHostTableDesc = "The table below shows the external (outside EPA) hosts who have downloaded data. We do not currently link hosts to specific files."; 
-        if (document.getElementById('FrogHostTableDesc')) {
-            document.getElementById('FrogHostTableDesc').innerHTML = FrogHostTableDesc;
-        }
     
     var FrogHostTableDesc = "The table below shows the external hosts who have downloaded data. We do not currently link hosts to specific files."; 
         if (document.getElementById('FrogHostTableDesc')) {
