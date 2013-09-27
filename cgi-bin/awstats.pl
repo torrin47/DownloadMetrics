@@ -1,7 +1,7 @@
 #!C:/Perl/bin/perl.exe
 # BG changes marked with BG in comments
 # Monthly Version only. Does not include dropdown list used on Annual pages
-# 
+# V1.0
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 # $Revision: 1.989 $ - $Author: eldy $ - $Date: 2013/03/08 20:16:52 $
@@ -1067,9 +1067,9 @@ sub tab_head {
 }
 
 #------------------------------------------------------------------------------
-# Direct copy of tab_head, but with autosort parameter added to the table header
+#BG this entire sub is Direct copy of tab_head, but with autosort parameter on 1st column (Hits) added to the table header using JS
 #------------------------------------------------------------------------------
-sub tab_headautosort {
+sub tab_headautosort1 {
 	my $title     = shift;
 	my $tooltipnb = shift;
 	my $width     = shift || 70;
@@ -1112,6 +1112,61 @@ sub tab_headautosort {
 "<table class=\"aws_data sortable-onload-1\" border=\"1\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n"; #BG Added - changed class to auto sort
 	}
 }
+
+
+
+
+
+#------------------------------------------------------------------------------
+#BG this entire sub is Direct copy of tab_head, but with autosort parameter on 3rd column (Hits) added to the table header using JS
+#------------------------------------------------------------------------------
+sub tab_headautosort3 {
+	my $title     = shift;
+	my $tooltipnb = shift;
+	my $width     = shift || 70;
+	my $class     = shift;
+
+	# Call to plugins' function TabHeadHTML
+	my $extra_head_html = '';
+	foreach my $pluginname ( keys %{ $PluginsLoaded{'TabHeadHTML'} } ) {
+		my $function = "TabHeadHTML_$pluginname";
+		$extra_head_html .= &$function($title);
+	}
+
+	if ( $width == 70 && $QueryString =~ /buildpdf/i ) {
+		print
+"<table class=\"aws_border sortable\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"800\">\n";
+	}
+	else {
+		print
+"<table class=\"aws_border sortable\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n";
+	}
+
+	if ($tooltipnb) {
+		print "<tr><td class=\"aws_title\" width=\"$width%\""
+		  . Tooltip( $tooltipnb, $tooltipnb )
+		  . ">$title "
+		  . $extra_head_html . "</td>";
+	}
+	else {
+		print "<tr><td class=\"aws_title\" width=\"$width%\">$title "
+		  . $extra_head_html . "</td>";
+	}
+	print "<td class=\"aws_blank\">&nbsp;</td></tr>\n";
+	print "<tr><td colspan=\"2\">\n";
+	if ( $width == 70 && $QueryString =~ /buildpdf/i ) {
+		print
+"<table class=\"aws_data\" border=\"1\" cellpadding=\"2\" cellspacing=\"0\" width=\"796\">\n";
+	}
+	else {
+		print
+"<table class=\"aws_data sortable-onload-3\" border=\"1\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n"; #BG Added - changed class to auto sort
+	}
+}
+
+
+
+
 
 
 
@@ -12431,7 +12486,7 @@ sub HTMLShowHosts{
 		$cpt = ( scalar keys %_host_h );
 	}
 	#&tab_head( "$title", 19, 0, 'hosts' ); 
-    &tab_headautosort( "$title", 19, 0, 'hosts' ); #BG Added change tab_head to tab_headautosort
+    &tab_headautosort1( "$title", 19, 0, 'hosts' ); #BG Added change tab_head to tab_headautosort
 	print "<tr bgcolor=\"#$color_TableBGRowTitle\"><th>";
 	if ( $FilterIn{'host'} || $FilterEx{'host'} ) {    # With filter
 		if ( $FilterIn{'host'} ) {
@@ -12467,7 +12522,7 @@ sub HTMLShowHosts{
 		print
         #BG added to sort hit column on Full List of Hits Static page
 		  #"<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>";
-          "<th bgcolor=\"#$color_h\" width=\"80\" class=\"sortable favour_reverse\">$Message[57]</th>";  
+          "<th bgcolor=\"#$color_h\" width=\"80\" class=\"sortable-numeric favour_reverse\">$Message[57]</th>";  
     }
 	if ( $ShowHostsStats =~ /B/i ) {
 		print
@@ -12574,7 +12629,8 @@ sub HTMLShowDomains{
 		$title .= "$Message[25]";
 		$cpt = ( scalar keys %_domener_h );
 	}
-	&tab_head( "$title", 19, 0, 'domains' );
+	#&tab_head( "$title", 19, 0, 'domains' ); #BG removed
+    &tab_headautosort3( "$title", 19, 0, 'domains' ); #BG changed to autosortable domains/countries
 	print
 "<tr bgcolor=\"#$color_TableBGRowTitle\"><th width=\"$WIDTHCOLICON\">&nbsp;</th><th colspan=\"2\">$Message[17]</th>";
 	if ( $ShowDomainsStats =~ /U/i ) {
@@ -12591,7 +12647,8 @@ sub HTMLShowDomains{
 	}
 	if ( $ShowDomainsStats =~ /H/i ) {
 		print
-		  "<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>";
+		  #"<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>"; #BG removed original
+          "<th bgcolor=\"#$color_h\" width=\"80\" class=\"sortable-numeric favour_reverse\">$Message[57]</th>"; #BG for sorting column
 	}
 	if ( $ShowDomainsStats =~ /B/i ) {
 		print
@@ -17699,11 +17756,11 @@ if ($lastyearbeforeupdate) {
 		$lastdaybeforeupdate, $lasthourbeforeupdate, 0, 0, "general" );
 }
 
-# Warning if lastline in future
+# Warning if lastline in future #BG remove this warning because of UTC time difference with Server time
 if ( $LastLine > ( $nowtime + 20000 ) ) {
-	warning(
-"WARNING: LastLine parameter in history file is '$LastLine' so in future. May be you need to correct manually the line LastLine in some awstats*.$SiteConfig.conf files."
-	);
+	# warning(
+# "WARNING: LastLine parameter in history file is '$LastLine' so in future. May be you need to correct manually the line LastLine in some awstats*.$SiteConfig.conf files."
+	# );
 }
 
 # Force LastLine

@@ -12529,7 +12529,7 @@ sub HTMLShowHosts{
 		print
         #BG added to sort hit column on Full List of Hits Static page
 		  #"<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>";
-          "<th bgcolor=\"#$color_h\" width=\"80\" class=\"sortable favour_reverse\">$Message[57]</th>";  
+          "<th bgcolor=\"#$color_h\" width=\"80\" class=\"sortable-numeric favour_reverse\">$Message[57]</th>";  
     }
 	if ( $ShowHostsStats =~ /B/i ) {
 		print
@@ -17761,11 +17761,11 @@ if ($lastyearbeforeupdate) {
 		$lastdaybeforeupdate, $lasthourbeforeupdate, 0, 0, "general" );
 }
 
-# Warning if lastline in future
+# Warning if lastline in future #BG remove this warning because of UTC time difference with Server time
 if ( $LastLine > ( $nowtime + 20000 ) ) {
-	warning(
-"WARNING: LastLine parameter in history file is '$LastLine' so in future. May be you need to correct manually the line LastLine in some awstats*.$SiteConfig.conf files."
-	);
+	# warning(
+# "WARNING: LastLine parameter in history file is '$LastLine' so in future. May be you need to correct manually the line LastLine in some awstats*.$SiteConfig.conf files."
+	# );
 }
 
 # Force LastLine
