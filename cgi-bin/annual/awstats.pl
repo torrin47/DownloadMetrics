@@ -14829,6 +14829,7 @@ sub HTMLMainHosts{
 	my $NewLinkTarget = shift;
 	
 	if ($Debug) { debug( "ShowHostsStats", 2 ); }
+    print "<br /><div id=\"HostTableDesc\">&nbsp;</div>"; #BG Added for Comments on Hosts Table section via JS
 	print "$Center<a name=\"visitors\">&nbsp;</a><br />\n";
 	my $title =
 #BG Remove "$Message[81] ($Message[77] $MaxNbOf{'HostsShown'}) &nbsp; - &nbsp; <a href=\""
