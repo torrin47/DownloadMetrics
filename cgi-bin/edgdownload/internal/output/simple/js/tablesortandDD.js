@@ -1,5 +1,5 @@
 ﻿/*
-        Innovate GIS V2.1
+        Innovate GIS V2.1.1
         - Added functions for dropdown menu to operate properly
         - Added functions to add descriptions to each stats section on annual pages
         
@@ -55,6 +55,10 @@ function addSectionDescriptions() {
             document.getElementById('HostTableDesc').innerHTML = HostTableDesc;
         }
     
+    var FrogHostTableDesc = "The table below shows the external hosts who have downloaded data. We do not currently link hosts to specific files."; 
+        if (document.getElementById('FrogHostTableDesc')) {
+            document.getElementById('FrogHostTableDesc').innerHTML = FrogHostTableDesc;
+        }
     
 }
 
