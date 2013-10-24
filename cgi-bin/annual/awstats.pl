@@ -12811,8 +12811,8 @@ sub HTMLShowDownloads{
 	print "$Center<a name=\"downloads\">&nbsp;</a><br />\n";
 	&tab_head( $Message[178], 19, 0, "downloads" );
 	print "<tr bgcolor=\"#$color_TableBGRowTitle\"><th colspan=\"2\">$Message[178]</th>";
-	if ( $ShowFileTypesStats =~ /H/i ){print "<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>"
-		."<th bgcolor=\"#$color_h\" width=\"80\">206 $Message[57]</th>"; }
+	if ( $ShowFileTypesStats =~ /H/i ){print "<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>";}
+		#."<th bgcolor=\"#$color_h\" width=\"80\">206 $Message[57]</th>"; }
 	if ( $ShowFileTypesStats =~ /B/i ){
 		print "<th bgcolor=\"#$color_k\" width=\"80\">$Message[75]</th>";
 		print "<th bgcolor=\"#$color_k\" width=\"80\">$Message[106]</th>";
@@ -12843,7 +12843,7 @@ sub HTMLShowDownloads{
 		print "</td>";
 		if ( $ShowFileTypesStats =~ /H/i ){
 			print "<td>".Format_Number($_downloads{$u}->{'AWSTATS_HITS'})."</td>";
-			print "<td>".Format_Number($_downloads{$u}->{'AWSTATS_206'})."</td>";
+			#print "<td>".Format_Number($_downloads{$u}->{'AWSTATS_206'})."</td>";
 		}
 		if ( $ShowFileTypesStats =~ /B/i ){
 			print "<td>".Format_Bytes($_downloads{$u}->{'AWSTATS_SIZE'})."</td>";
@@ -14296,8 +14296,8 @@ sub HTMLMainDownloads{
 	
 	my $total_dls = scalar keys %_downloads;
 	print "<tr bgcolor=\"#$color_TableBGRowTitle\"><th colspan=\"2\">$Message[178]: $total_dls</th>";
-	if ( $ShowDownloadsStats =~ /H/i ){print "<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>"
-		."<th bgcolor=\"#$color_h\" width=\"80\">206 $Message[57]</th>"; }
+	if ( $ShowDownloadsStats =~ /H/i ){print "<th bgcolor=\"#$color_h\" width=\"80\">$Message[57]</th>";}
+		#."<th bgcolor=\"#$color_h\" width=\"80\">206 $Message[57]</th>"; }
 	if ( $ShowDownloadsStats =~ /B/i ){
 		print "<th bgcolor=\"#$color_k\" width=\"80\">$Message[75]</th>";
 		print "<th bgcolor=\"#$color_k\" width=\"80\">$Message[106]</th>"; 
@@ -14328,7 +14328,7 @@ sub HTMLMainDownloads{
 		print "</td>";
 		if ( $ShowDownloadsStats =~ /H/i ){
 			print "<td>".Format_Number($_downloads{$u}->{'AWSTATS_HITS'})."</td>";
-			print "<td>".Format_Number($_downloads{$u}->{'AWSTATS_206'})."</td>";
+			#print "<td>".Format_Number($_downloads{$u}->{'AWSTATS_206'})."</td>";
 		}
 		if ( $ShowDownloadsStats =~ /B/i ){
 			print "<td>".Format_Bytes($_downloads{$u}->{'AWSTATS_SIZE'})."</td>";
