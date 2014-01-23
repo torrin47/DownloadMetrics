@@ -10019,7 +10019,7 @@ sub HTMLTopBanner{
     #####################################################
     #####################################################
     #####################################################
-    #BG - Added 2014 option in year dropdown list below
+    
     
     
     
@@ -10073,9 +10073,7 @@ sub HTMLTopBanner{
     </select>
 
     <select class="aws_formfield" name="year" id="selYear">
-    <option value="2013">2013</option>
-    <option selected="selected" value="2014">2014</option> 
-    
+    <option selected="selected" value="2013">2013</option>
     </select>
 
     <input type="button" value=" GO! " class="aws_button" onclick="takeuserto(this.form)"/></td></tr>
